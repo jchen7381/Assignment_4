@@ -38,8 +38,11 @@ vector<int> GenerateRandomVector(size_t size_of_vector) {
   // Use rand() to generate random integer
   // Add code
     vector<int> random_vector;
-    for(unsigned int i = 0; i <= size_of_vector; i++){
+    for(unsigned int i = 0; i < size_of_vector; ++i){
         random_vector.push_back(rand());
+    }
+    for(unsigned int i = 0; i < size_of_vector; ++i){
+        cout << random_vector[i] << endl;
     }
     return random_vector;
 }
@@ -51,13 +54,16 @@ vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) 
   // Add code
     vector<int> sorted_vector;
     if(smaller_to_larger == true){
-        for(unsigned int i = 0; i <= size_of_vector; ++i){
+        for(unsigned int i = 0; i < size_of_vector; ++i){
+            
             sorted_vector.push_back(i);
+            
         }
     }
     else{
-        for(unsigned int i = size_of_vector; i >= 0; --i){
+        for(unsigned int i = size_of_vector; i > 0; --i){
             sorted_vector.push_back(i);
+            cout << i << endl;
         }
     }
     
@@ -74,12 +80,18 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
         return true;
     }
     
+    if(input.size() == 1){
+        return true;
+    }
+    
     for(unsigned int i = 0; i <= input.size(); i++){
         if(less_than(input[i], input[i+1])){
+            return true;
+        }
+        else{
             return false;
         }
     }
-    return true;
 }
 
 // Wrapper function to test different sorting algorithms. See homework's PDF for details.
@@ -104,15 +116,17 @@ void testSortingWrapper(int argc, char **argv) {
   TestTiming();
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
-  vector<int> input_vector;
+    vector<int> input_vector;
   if (input_type == "random") {
     // Generate random vector @input_vector.
+      GenerateRandomVector(input_size);
+      
     
   } else {
     // Generate sorted vector @input_vector.
-
+      GenerateSortedVector(input_size, false);
   }
-
+    
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.
   // ...
   // if comparison type is "less" then call 

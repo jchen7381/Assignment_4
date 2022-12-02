@@ -13,7 +13,6 @@
 #include <vector>
 #include <functional>
 
-#include <algorithm>
 using namespace std;
 
 
@@ -80,15 +79,15 @@ void shellsort( vector<Comparable> & a )
 /**
  * Standard heapsort.
  */
-template <typename Comparable>
-void heapsort( vector<Comparable> & a )
+template <typename Comparable, typename Comparator>
+void heapsort( vector<Comparable> & a, Comparator less_than)
 {
     for( int i = a.size( ) / 2 - 1; i >= 0; --i )  /* buildHeap */
-        percDown( a, i, a.size( ) );
+        percDown( a, i, a.size( ));
     for( int j = a.size( ) - 1; j > 0; --j )
     {
         std::swap( a[ 0 ], a[ j ] );               /* deleteMax */
-        percDown( a, 0, j );
+        percDown( a, 0, j);
     }
 }
 
@@ -108,18 +107,18 @@ inline int leftChild( int i )
  * i is the position from which to percolate down.
  * n is the logical size of the binary heap.
  */
-template <typename Comparable>
-void percDown( vector<Comparable> & a, int i, int n )
+template <typename Comparable, typename Comparator>
+void percDown( vector<Comparable> & a, int i, int n, Comparator less_than)
 {
     int child;
     Comparable tmp;
 
-    for( tmp = std::move( a[ i ] ); leftChild( i ) < n; i = child )
+    for( tmp = std::move( a[ i ] ); less_than(leftChild( i ), n); i = child )
     {
         child = leftChild( i );
-        if( child != n - 1 && a[ child ] < a[ child + 1 ] )
+        if( child != n - 1 && less_than(a[ child ], a[ child + 1 ]) )
             ++child;
-        if( tmp < a[ child ] )
+        if( less_than(tmp, a[ child ]) )
             a[ i ] = std::move( a[ child ] );
         else
             break;
@@ -395,13 +394,8 @@ template <typename Comparable, typename Comparator>
 void HeapSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-    if(less_than == true){
-        heapsort(a);
-    }
-    else{
-        heapsort(a);
-        a.reverse(a.being(), a.end());
-    }
+    heapsort(a, less_than);
+
 }
  
 // Driver for MergeSort.
@@ -411,13 +405,8 @@ template <typename Comparable, typename Comparator>
 void MergeSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-    if(less_than == true){
-        mergeSort(a);
-    }
-    else{
-        mergeSort(a);
-        a.reverse(a.being(), a.end());
-    }
+   
+
 
 }
 
