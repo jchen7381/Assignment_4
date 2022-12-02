@@ -411,8 +411,7 @@ template <typename Comparable, typename Comparator>
 void MergeSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-    vector<Comparable> tmpArray( a.size( ) );
-    mergeSort( a, tmpArray, 0, a.size( ) - 1, less_than );
+
     
 
 
