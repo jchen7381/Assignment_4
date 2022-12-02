@@ -118,30 +118,51 @@ void testSortingWrapper(int argc, char **argv) {
   //TestTiming();
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
-    vector<int> input_vector{23,1,42,512,2,41,19};
+    vector<int> input_vector{};
   if (input_type == "random") {
     // Generate random vector @input_vector.
-      GenerateRandomVector(input_size);
+      input_vector = GenerateRandomVector(input_size);
       
     
   } else {
     // Generate sorted vector @input_vector.
-      GenerateSortedVector(input_size, false);
+      input_vector = GenerateSortedVector(input_size, false);
+      
   }
-    for( unsigned i = 0; i < input_vector.size(); ++i){
-        cout << input_vector[i] << " ";
-    }
+    
+    cout << "HeapSort" << endl;
+    auto begin_time = chrono::high_resolution_clock::now();
+    HeapSort(input_vector, greater<int>{});
+    auto end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
     cout << endl;
-    const auto begin_time = chrono::high_resolution_clock::now();
+    
+    cout << "MergeSort" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    MergeSort(input_vector, greater<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << endl;
+    
+    cout << "QuickSort" << endl;
+    begin_time = chrono::high_resolution_clock::now();
     QuickSort(input_vector, less<int>{});
-    for( unsigned i = 0; i < input_vector.size(); ++i){
-        cout << input_vector[i] << " ";
-    }
-    cout << endl;
-    const auto end_time = chrono::high_resolution_clock::now();
+    end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     cout << endl;
+    
+    cout << "ShellSort" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    ShellSort(input_vector, less<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
+    cout << endl;
+    
+    
     
     
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.

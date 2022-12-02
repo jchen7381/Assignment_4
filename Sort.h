@@ -207,12 +207,12 @@ void mergeSort( vector<Comparable> & a, Comparator less_than)
  * Return median of left, center, and right.
  * Order these and hide the pivot.
  */
-template <typename Comparable>
-const Comparable & median3( vector<Comparable> & a, int left, int right )
+template <typename Comparable, typename Comparator >
+const Comparable & median3( vector<Comparable> & a, int left, int right, Comparator less_than )
 {
     int center = ( left + right ) / 2;
     
-    if( a[ center ] < a[ left ] )
+    if( a[ center ] > a[ left ] )
         std::swap( a[ left ], a[ center ] );
     if( a[ right ] < a[ left ] )
         std::swap( a[ left ], a[ right ] );
@@ -236,16 +236,16 @@ void quicksort( vector<Comparable> & a, int left, int right, Comparator less_tha
 {
     if( left + 10 <= right )
     {
-        const Comparable & pivot = median3( a, left, right );
+        const Comparable & pivot = median3( a, left, right, less_than );
 
             // Begin partitioning
         int i = left, j = right - 1;
         for( ; ; )
         {
-            while( a[ ++i ] > pivot ) { }
-            while( pivot > a[ --j ] ) { }
+            while( a[ ++i ] < pivot ) { }
+            while( pivot < a[ --j ] ) { }
             if( i < j )
-                std::swap( a[ i ], a[ j ] );
+                std::swap( a[ i], a[ j ] );
             else
                 break;
         }
@@ -445,6 +445,13 @@ void QuickSort2(vector<Comparable> &a, Comparator less_than) {
 template <typename Comparable, typename Comparator>
 void QuickSort3(vector<Comparable> &a, Comparator less_than) {
   // quicksort implementation
+  // to be filled
+
+}
+
+template <typename Comparable, typename Comparator>
+void ShellSort(vector<Comparable> &a, Comparator less_than) {
+  // shellsort implementation
   // to be filled
 
 }
