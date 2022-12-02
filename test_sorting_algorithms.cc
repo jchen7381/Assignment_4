@@ -82,12 +82,12 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
         return true;
     }
     
-    for(unsigned int i = 0; i <= input.size(); i++){
-        if(less_than(input[i], input[i+1])){
-            return true;
+    for(unsigned int i = 0; i <= input.size(); ++i){
+        if(less_than(input[i], input[i+1])!= true){
+            return false;
         }
         else{
-            return false;
+            return true;
         }
     }
 }
