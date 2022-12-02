@@ -82,7 +82,7 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
         return true;
     }
     
-    for(unsigned int i = 0; i <= (input.size() - 1); ++i){
+    for(unsigned int i = 0; i <= input.size() - 1; ++i){
         if(less_than(input[i], input[i+1])){
             
         }
@@ -132,7 +132,9 @@ void testSortingWrapper(int argc, char **argv) {
     cout << endl;
     auto begin_time = chrono::high_resolution_clock::now();
     HeapSort(input_vector, less<int>{});
-    
+    for( unsigned i = 0; i < input_vector.size(); ++i){
+        cout << input_vector[i] << endl;
+    }
     auto end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     cout << endl;
@@ -141,6 +143,9 @@ void testSortingWrapper(int argc, char **argv) {
     cout << "MergeSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
     MergeSort(input_vector, less<int>{});
+    for( unsigned i = 0; i < input_vector.size(); ++i){
+        cout << input_vector[i] << endl;
+    }
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     cout << endl;

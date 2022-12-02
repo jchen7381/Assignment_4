@@ -127,38 +127,6 @@ void percDown( vector<Comparable> & a, int i, int n, Comparator less_than)
 }
 
 /**
- * Internal method that makes recursive calls.
- * a is an array of Comparable items.
- * tmpArray is an array to place the merged result.
- * left is the left-most index of the subarray.
- * right is the right-most index of the subarray.
- */
-template <typename Comparable, typename Comparator>
-void mergeSort( vector<Comparable> & a,
-                vector<Comparable> & tmpArray, int left, int right, Comparator less_than )
-{
-    if( less_than(left, right) )
-    {
-        int center = ( left + right ) / 2;
-        mergeSort( a, tmpArray, left, center, less_than);
-        mergeSort( a, tmpArray, center + 1, right, less_than);
-        merge( a, tmpArray, left, center + 1, right, less_than);
-    }
-}
-
-/**
- * Mergesort algorithm (driver).
- */
-template <typename Comparable, typename Comparator>
-void mergeSort( vector<Comparable> & a, Comparator less_than)
-{
-    vector<Comparable> tmpArray( a.size( ) );
-    mergeSort( a, tmpArray, 0, a.size( ) - 1, less_than );
-    
-}
-
-
-/**
  * Internal method that merges two sorted halves of a subarray.
  * a is an array of Comparable items.
  * tmpArray is an array to place the merged result.
@@ -166,6 +134,7 @@ void mergeSort( vector<Comparable> & a, Comparator less_than)
  * rightPos is the index of the start of the second half.
  * rightEnd is the right-most index of the subarray.
  */
+
 template <typename Comparable>
 void merge( vector<Comparable> & a, vector<Comparable> & tmpArray,
             int leftPos, int rightPos, int rightEnd)
@@ -191,6 +160,42 @@ void merge( vector<Comparable> & a, vector<Comparable> & tmpArray,
     for( int i = 0; i < numElements; ++i, --rightEnd )
         a[ rightEnd ] = std::move( tmpArray[ rightEnd ] );
 }
+
+/**
+ * Internal method that makes recursive calls.
+ * a is an array of Comparable items.
+ * tmpArray is an array to place the merged result.
+ * left is the left-most index of the subarray.
+ * right is the right-most index of the subarray.
+ */
+
+
+template <typename Comparable, typename Comparator>
+void mergeSort( vector<Comparable> & a,
+                vector<Comparable> & tmpArray, int left, int right, Comparator less_than )
+{
+    if( less_than (left, right) )
+    {
+        int center = ( left + right ) / 2;
+        mergeSort( a, tmpArray, left, center, less_than);
+        mergeSort( a, tmpArray, center + 1, right, less_than);
+        merge( a, tmpArray, left, center + 1, right);
+    }
+}
+
+/**
+ * Mergesort algorithm (driver).
+ */
+template <typename Comparable, typename Comparator>
+void mergeSort( vector<Comparable> & a, Comparator less_than)
+{
+    vector<Comparable> tmpArray( a.size( ) );
+    mergeSort( a, tmpArray, 0, a.size( ) - 1, less_than );
+    
+}
+
+
+
 
 
 /**
@@ -394,6 +399,7 @@ template <typename Comparable, typename Comparator>
 void HeapSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
+    
     for( int i = a.size( ) / 2 - 1; i >= 0; --i )  /* buildHeap */
         percDown( a, i, a.size( ), less_than);
     for( int j = a.size( ) - 1; j > 0; --j )
@@ -411,7 +417,7 @@ template <typename Comparable, typename Comparator>
 void MergeSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-
+    mergeSort(a, less_than);
     
 
 
