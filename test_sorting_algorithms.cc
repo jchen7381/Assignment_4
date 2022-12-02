@@ -172,8 +172,7 @@ void testSortingWrapper(int argc, char **argv) {
     ShellSort(input_vector, less<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-    cout << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
         cout << input_vector[i] << " " ;
     }

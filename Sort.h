@@ -42,15 +42,15 @@ void insertionSort( vector<Comparable> & a )
  * left is the left-most index of the subarray.
  * right is the right-most index of the subarray.
  */
-template <typename Comparable>
-void insertionSort( vector<Comparable> & a, int left, int right )
+template <typename Comparable, typename Comparator>
+void insertionSort( vector<Comparable> & a, int left, int right, Comparator less_than )
 {
     for( int p = left + 1; p <= right; ++p )
     {
         Comparable tmp = std::move( a[ p ] );
         int j;
 
-        for( j = p; j > left && tmp < a[ j - 1 ]; --j )
+        for( j = p; j > left && less_than( tmp, a[ j - 1 ]); --j )
             a[ j ] = std::move( a[ j - 1 ] );
         a[ j ] = std::move( tmp );
     }
@@ -61,8 +61,8 @@ void insertionSort( vector<Comparable> & a, int left, int right )
 /**
  * Shellsort, using Shell's (poor) increments.
  */
-template <typename Comparable>
-void shellsort( vector<Comparable> & a )
+template <typename Comparable, typename Comparator>
+void shellsort( vector<Comparable> & a, Comparator less_than )
 {
     for( int gap = a.size( ) / 2; gap > 0; gap /= 2 )
         for( int i = gap; i < a.size( ); ++i )
@@ -70,7 +70,7 @@ void shellsort( vector<Comparable> & a )
             Comparable tmp = std::move( a[ i ] );
             int j = i;
 
-            for( ; j >= gap && tmp < a[ j - gap ]; j -= gap )
+            for( ; j >= gap && less_than (tmp , a[ j - gap ]); j -= gap )
                 a[ j ] = std::move( a[ j - gap ] );
             a[ j ] = std::move( tmp );
         }
@@ -256,7 +256,7 @@ void quicksort( vector<Comparable> & a, int left, int right, Comparator less_tha
         quicksort( a, i + 1, right, less_than );    // Sort large elements
     }
     else  // Do an insertion sort on the subarray
-        insertionSort( a, left, right );
+        insertionSort( a, left, right, less_than );
 }
 
 /**
@@ -453,6 +453,7 @@ template <typename Comparable, typename Comparator>
 void ShellSort(vector<Comparable> &a, Comparator less_than) {
   // shellsort implementation
   // to be filled
+    shellsort(a, less_than);
 
 }
 
