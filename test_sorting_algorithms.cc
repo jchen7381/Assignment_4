@@ -117,7 +117,7 @@ void testSortingWrapper(int argc, char **argv) {
   //TestTiming();
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
-    vector<int> input_vector{13,23,323,44,110,5};
+    vector<int> input_vector{1,2,3,4,5,6,7,8,9};
   if (input_type == "random") {
     // Generate random vector @input_vector.
       GenerateRandomVector(input_size);
