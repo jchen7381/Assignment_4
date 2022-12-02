@@ -29,7 +29,7 @@ void TestTiming() {
   for (int i = 1; i < 10000; ++i) sum ++;
   // End of piece of code to time.
   const auto end_time = chrono::high_resolution_clock::now();    
-  cout << ComputeDuration(begin_time, end_time) << "ns" << endl;
+  cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
 
 }
 
@@ -83,13 +83,12 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
     }
     
     for(unsigned int i = 0; i <= input.size(); ++i){
-        if(less_than(input[i], input[i+1])!= true){
+        if(less_than(input[i], input[i+1]) != true){
             return false;
-        }
-        else{
-            return true;
+        
         }
     }
+    return true;
 }
 
 // Wrapper function to test different sorting algorithms. See homework's PDF for details.
@@ -111,10 +110,10 @@ void testSortingWrapper(int argc, char **argv) {
   }
 
   // This block of code to be removed for your final submission.
-  TestTiming();
+  //TestTiming();
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
-    vector<int> input_vector;
+    vector<int> input_vector{1,2,3,4,10,5};
   if (input_type == "random") {
     // Generate random vector @input_vector.
       GenerateRandomVector(input_size);
@@ -124,6 +123,27 @@ void testSortingWrapper(int argc, char **argv) {
     // Generate sorted vector @input_vector.
       GenerateSortedVector(input_size, false);
   }
+    cout << endl;
+    cout << "HeapSort" << endl;
+    cout << endl;
+    auto begin_time = chrono::high_resolution_clock::now();
+    HeapSort(input_vector, less<int>{});
+    auto end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << endl;
+    
+    cout << "MergeSort" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    MergeSort(input_vector, less<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << endl;
+    
+    cout << "QuickSort" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    QuickSort(input_vector, less<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.
   // ...

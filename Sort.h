@@ -79,9 +79,10 @@ void shellsort( vector<Comparable> & a )
 /**
  * Standard heapsort.
  */
-template <typename Comparable, typename Comparator>
-void heapsort( vector<Comparable> & a, Comparator less_than)
+template <typename Comparable>
+void heapsort( vector<Comparable> & a)
 {
+    
     for( int i = a.size( ) / 2 - 1; i >= 0; --i )  /* buildHeap */
         percDown( a, i, a.size( ));
     for( int j = a.size( ) - 1; j > 0; --j )
@@ -394,7 +395,15 @@ template <typename Comparable, typename Comparator>
 void HeapSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-    heapsort(a, less_than);
+    
+    for( int i = a.size( ) / 2 - 1; i >= 0; --i )  /* buildHeap */
+        percDown( a, i, a.size( ), less_than);
+    for( int j = a.size( ) - 1; j > 0; --j )
+    {
+        std::swap( a[ 0 ], a[ j ] );               /* deleteMax */
+        percDown( a, 0, j, less_than);
+    }
+
 
 }
  
