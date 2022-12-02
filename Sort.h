@@ -79,16 +79,15 @@ void shellsort( vector<Comparable> & a )
 /**
  * Standard heapsort.
  */
-template <typename Comparable>
-void heapsort( vector<Comparable> & a)
+template <typename Comparable, typename Comparator>
+void heapsort( vector<Comparable> & a, Comparator less_than)
 {
-    
     for( int i = a.size( ) / 2 - 1; i >= 0; --i )  /* buildHeap */
-        percDown( a, i, a.size( ));
+        percDown( a, i, a.size( ), less_than);
     for( int j = a.size( ) - 1; j > 0; --j )
     {
         std::swap( a[ 0 ], a[ j ] );               /* deleteMax */
-        percDown( a, 0, j);
+        percDown( a, 0, j, less_than);
     }
 }
 
@@ -134,28 +133,28 @@ void percDown( vector<Comparable> & a, int i, int n, Comparator less_than)
  * left is the left-most index of the subarray.
  * right is the right-most index of the subarray.
  */
-template <typename Comparable>
+template <typename Comparable, typename Comparator>
 void mergeSort( vector<Comparable> & a,
-                vector<Comparable> & tmpArray, int left, int right )
+                vector<Comparable> & tmpArray, int left, int right, Comparator less_than )
 {
-    if( left < right )
+    if( less_than(left, right) )
     {
         int center = ( left + right ) / 2;
-        mergeSort( a, tmpArray, left, center );
-        mergeSort( a, tmpArray, center + 1, right );
-        merge( a, tmpArray, left, center + 1, right );
+        mergeSort( a, tmpArray, left, center, less_than);
+        mergeSort( a, tmpArray, center + 1, right, less_than);
+        merge( a, tmpArray, left, center + 1, right, less_than);
     }
 }
 
 /**
  * Mergesort algorithm (driver).
  */
-template <typename Comparable>
-void mergeSort( vector<Comparable> & a )
+template <typename Comparable, typename Comparator>
+void mergeSort( vector<Comparable> & a, Comparator less_than)
 {
     vector<Comparable> tmpArray( a.size( ) );
-
-    mergeSort( a, tmpArray, 0, a.size( ) - 1 );
+    mergeSort( a, tmpArray, 0, a.size( ) - 1, less_than );
+    
 }
 
 
@@ -169,7 +168,7 @@ void mergeSort( vector<Comparable> & a )
  */
 template <typename Comparable>
 void merge( vector<Comparable> & a, vector<Comparable> & tmpArray,
-            int leftPos, int rightPos, int rightEnd )
+            int leftPos, int rightPos, int rightEnd)
 {
     int leftEnd = rightPos - 1;
     int tmpPos = leftPos;
@@ -395,7 +394,6 @@ template <typename Comparable, typename Comparator>
 void HeapSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-    
     for( int i = a.size( ) / 2 - 1; i >= 0; --i )  /* buildHeap */
         percDown( a, i, a.size( ), less_than);
     for( int j = a.size( ) - 1; j > 0; --j )
@@ -403,7 +401,6 @@ void HeapSort(vector<Comparable> &a, Comparator less_than) {
         std::swap( a[ 0 ], a[ j ] );               /* deleteMax */
         percDown( a, 0, j, less_than);
     }
-
 
 }
  
@@ -414,7 +411,9 @@ template <typename Comparable, typename Comparator>
 void MergeSort(vector<Comparable> &a, Comparator less_than) {
   // Add code. You can use any of functions above (after you modified them), or any other helper
   // function you write.
-   
+    vector<Comparable> tmpArray( a.size( ) );
+    mergeSort( a, tmpArray, 0, a.size( ) - 1, less_than );
+    
 
 
 }

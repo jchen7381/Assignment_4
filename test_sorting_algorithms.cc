@@ -83,12 +83,16 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
     }
     
     for(unsigned int i = 0; i <= input.size(); ++i){
-        if(less_than(input[i], input[i+1]) != true){
+        if(less_than(input[i], input[i+1])){
+            
+        }
+        else{
             return false;
-        
         }
     }
+    
     return true;
+    
 }
 
 // Wrapper function to test different sorting algorithms. See homework's PDF for details.
@@ -113,7 +117,7 @@ void testSortingWrapper(int argc, char **argv) {
   //TestTiming();
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
-    vector<int> input_vector{1,2,3,4,10,5};
+    vector<int> input_vector{13,23,323,44,110,5};
   if (input_type == "random") {
     // Generate random vector @input_vector.
       GenerateRandomVector(input_size);
@@ -128,8 +132,12 @@ void testSortingWrapper(int argc, char **argv) {
     cout << endl;
     auto begin_time = chrono::high_resolution_clock::now();
     HeapSort(input_vector, less<int>{});
+    for(unsigned int i = 0 ; i <= input_vector.size() ; ++i){
+        cout << input_vector[i] << endl;
+    }
     auto end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << VerifyOrder(input_vector,less<int>{}) << endl;
     cout << endl;
     
     cout << "MergeSort" << endl;
