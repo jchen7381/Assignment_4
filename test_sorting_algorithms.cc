@@ -128,14 +128,16 @@ void testSortingWrapper(int argc, char **argv) {
     // Generate sorted vector @input_vector.
       GenerateSortedVector(input_size, false);
   }
-    cout << endl;
-    cout << "MergeSort" << endl;
+    for( unsigned i = 0; i < input_vector.size(); ++i){
+        cout << input_vector[i] << " ";
+    }
     cout << endl;
     const auto begin_time = chrono::high_resolution_clock::now();
-    HeapSort(input_vector, less<int>{});
+    QuickSort(input_vector, less<int>{});
     for( unsigned i = 0; i < input_vector.size(); ++i){
-        cout << input_vector[i] << endl;
+        cout << input_vector[i] << " ";
     }
+    cout << endl;
     const auto end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
