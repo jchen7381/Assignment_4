@@ -42,7 +42,7 @@ vector<int> GenerateRandomVector(size_t size_of_vector) {
         random_vector.push_back(rand());
     }
     for(unsigned int i = 0; i < size_of_vector; ++i){
-        cout << random_vector[i] << endl;
+
     }
     return random_vector;
 }
@@ -55,7 +55,6 @@ vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) 
     vector<int> sorted_vector;
     if(smaller_to_larger == true){
         for(unsigned int i = 0; i < size_of_vector; ++i){
-            
             sorted_vector.push_back(i);
             
         }
@@ -63,7 +62,6 @@ vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) 
     else{
         for(unsigned int i = size_of_vector; i > 0; --i){
             sorted_vector.push_back(i);
-            cout << i << endl;
         }
     }
     
