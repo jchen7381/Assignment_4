@@ -135,9 +135,9 @@ void percDown( vector<Comparable> & a, int i, int n, Comparator less_than)
  * rightEnd is the right-most index of the subarray.
  */
 
-template <typename Comparable>
+template <typename Comparable, typename Comparator>
 void merge( vector<Comparable> & a, vector<Comparable> & tmpArray,
-            int leftPos, int rightPos, int rightEnd)
+            int leftPos, int rightPos, int rightEnd, Comparator less_than)
 {
     int leftEnd = rightPos - 1;
     int tmpPos = leftPos;
@@ -157,7 +157,7 @@ void merge( vector<Comparable> & a, vector<Comparable> & tmpArray,
         tmpArray[ tmpPos++ ] = std::move( a[ rightPos++ ] );
 
     // Copy tmpArray back
-    for( int i = 0; i < numElements; ++i, --rightEnd )
+    for( int i = 0; less_than(i, numElements); ++i, --rightEnd )
         a[ rightEnd ] = std::move( tmpArray[ rightEnd ] );
 }
 
@@ -179,7 +179,7 @@ void mergeSort( vector<Comparable> & a,
         int center = ( left + right ) / 2;
         mergeSort( a, tmpArray, left, center, less_than);
         mergeSort( a, tmpArray, center + 1, right, less_than);
-        merge( a, tmpArray, left, center + 1, right);
+        merge( a, tmpArray, left, center + 1, right, less_than);
     }
 }
 

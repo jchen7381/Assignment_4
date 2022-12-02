@@ -129,10 +129,10 @@ void testSortingWrapper(int argc, char **argv) {
       GenerateSortedVector(input_size, false);
   }
     cout << endl;
-    cout << "HeapSort" << endl;
+    cout << "MergeSort" << endl;
     cout << endl;
     const auto begin_time = chrono::high_resolution_clock::now();
-    HeapSort(input_vector, less<int>{});
+    MergeSort(input_vector, less<int>{});
     for( unsigned i = 0; i < input_vector.size(); ++i){
         cout << input_vector[i] << endl;
     }
