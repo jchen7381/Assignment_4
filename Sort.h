@@ -212,11 +212,11 @@ const Comparable & median3( vector<Comparable> & a, int left, int right, Compara
 {
     int center = ( left + right ) / 2;
     
-    if( a[ center ] > a[ left ] )
+    if( less_than(a[ center ], a[ left ] ))
         std::swap( a[ left ], a[ center ] );
-    if( a[ right ] < a[ left ] )
+    if( less_than(a[ right ] , a[ left ] ))
         std::swap( a[ left ], a[ right ] );
-    if( a[ right ] < a[ center ] )
+    if( less_than(a[ right ] , a[ center ]) )
         std::swap( a[ center ], a[ right ] );
 
         // Place pivot at position right - 1
@@ -242,8 +242,8 @@ void quicksort( vector<Comparable> & a, int left, int right, Comparator less_tha
         int i = left, j = right - 1;
         for( ; ; )
         {
-            while( a[ ++i ] < pivot ) { }
-            while( pivot < a[ --j ] ) { }
+            while( less_than(a[ ++i ], pivot )) { }
+            while( less_than(pivot , a[ --j ] )) { }
             if( i < j )
                 std::swap( a[ i], a[ j ] );
             else

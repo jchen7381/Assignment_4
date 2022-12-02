@@ -129,14 +129,19 @@ void testSortingWrapper(int argc, char **argv) {
       input_vector = GenerateSortedVector(input_size, false);
       
   }
-    
+    input_vector = {13,21,31,2,45,1,2,26};
     cout << "HeapSort" << endl;
     auto begin_time = chrono::high_resolution_clock::now();
     HeapSort(input_vector, greater<int>{});
     auto end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
+        cout << input_vector[i] << " " ;
+    }
     cout << endl;
+    cout << endl;
+
     
     cout << "MergeSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
@@ -144,14 +149,22 @@ void testSortingWrapper(int argc, char **argv) {
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
+        cout << input_vector[i] << " " ;
+    }
+    cout << endl;
     cout << endl;
     
     cout << "QuickSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
-    QuickSort(input_vector, less<int>{});
+    QuickSort(input_vector, greater<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
+        cout << input_vector[i] << " " ;
+    }
+    cout << endl;
     cout << endl;
     
     cout << "ShellSort" << endl;
@@ -159,8 +172,11 @@ void testSortingWrapper(int argc, char **argv) {
     ShellSort(input_vector, less<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
     cout << endl;
+    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
+        cout << input_vector[i] << " " ;
+    }
     
     
     
