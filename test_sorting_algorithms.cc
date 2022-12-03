@@ -127,7 +127,24 @@ void testSortingWrapper(int argc, char **argv) {
       input_vector = GenerateSortedVector(input_size, false);
       
   }
-    
+    // Call HeapSort / MergeSort / QuickSort  using appropriate input.
+    // ...
+    // if comparison type is "less" then call
+    // MergeSort(input_vector, less<int>{})
+    // otherwise call
+    // MergeSort(input_vector, greater<int>{})
+    // ...
+    // ^^SAME for HeapSort & QuickSort
+
+    // Call quicksort with median of three as pivot / middle as pivot / first as pivot using appropriate input.
+    // ...
+    // if comparison type is "less" then call
+    // QuickSort(input_vector, less<int>{})
+    // otherwise call
+    // QuickSort(input_vector, greater<int>{})
+    // ...
+    // ^^SAME for QuickSort2 & QuickSort3
+
     if(comparison_type == "less"){
         cout << "HeapSort" << endl;
         auto begin_time = chrono::high_resolution_clock::now();
@@ -163,23 +180,58 @@ void testSortingWrapper(int argc, char **argv) {
         cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
         cout << endl;
         
-        cout << "Testing QuickSort Pivot Implementions" << endl;
-        cout << endl;
-        cout << "Median of Three" << endl;
+        
+    }
+    else if(comparison_type == "greater"){
+        cout << "HeapSort" << endl;
+        auto begin_time = chrono::high_resolution_clock::now();
+        HeapSort(input_vector, greater<int>{});
+        auto end_time = chrono::high_resolution_clock::now();
+        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl << endl;
+        
+        
+        cout << "MergeSort" << endl;
         begin_time = chrono::high_resolution_clock::now();
-        QuickSort(input_vector, less<int>{});
+        MergeSort(input_vector, greater<int>{});
         end_time = chrono::high_resolution_clock::now();
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
-        cout << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl << endl;
+        
+        
+        cout << "QuickSort" << endl;
+        begin_time = chrono::high_resolution_clock::now();
+        QuickSort(input_vector, greater<int>{});
+        end_time = chrono::high_resolution_clock::now();
+        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl << endl;
+        
+        cout << "ShellSort" << endl;
+        begin_time = chrono::high_resolution_clock::now();
+        ShellSort(input_vector, greater<int>{});
+        end_time = chrono::high_resolution_clock::now();
+        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl << endl;
+        
+    }
+    
+    
+    if(comparison_type == "less"){
+        
+        cout << "Testing QuickSort Pivot Implementions" << endl << endl;
+        cout << "Median of Three" << endl;
+        auto begin_time = chrono::high_resolution_clock::now();
+        QuickSort(input_vector, less<int>{});
+        auto end_time = chrono::high_resolution_clock::now();
+        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl << endl;
         
         cout << "Middle" << endl;
         begin_time = chrono::high_resolution_clock::now();
         QuickSort2(input_vector, less<int>{});
         end_time = chrono::high_resolution_clock::now();
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
-        cout << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl << endl;
         
         cout << "First" << endl;
         begin_time = chrono::high_resolution_clock::now();
@@ -188,58 +240,22 @@ void testSortingWrapper(int argc, char **argv) {
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
         cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     }
-    else{
-        cout << "HeapSort" << endl;
+    else if(comparison_type == "greater"){
+        
+        cout << "Testing QuickSort Pivot Implementions" << endl << endl;
+        cout << "Median of Three" << endl;
         auto begin_time = chrono::high_resolution_clock::now();
-        HeapSort(input_vector, greater<int>{});
+        QuickSort(input_vector, greater<int>{});
         auto end_time = chrono::high_resolution_clock::now();
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-        cout << endl;
-        
-        
-        cout << "MergeSort" << endl;
-        begin_time = chrono::high_resolution_clock::now();
-        MergeSort(input_vector, greater<int>{});
-        end_time = chrono::high_resolution_clock::now();
-        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-        cout << endl;
-        
-        
-        cout << "QuickSort" << endl;
-        begin_time = chrono::high_resolution_clock::now();
-        QuickSort(input_vector, greater<int>{});
-        end_time = chrono::high_resolution_clock::now();
-        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-        cout << endl;
-        
-        cout << "ShellSort" << endl;
-        begin_time = chrono::high_resolution_clock::now();
-        ShellSort(input_vector, greater<int>{});
-        end_time = chrono::high_resolution_clock::now();
-        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-        cout << endl;
-        
-        cout << "Testing QuickSort Pivot Implementions" << endl;
-        cout << endl;
-        cout << "Median of Three" << endl;
-        begin_time = chrono::high_resolution_clock::now();
-        QuickSort(input_vector, greater<int>{});
-        end_time = chrono::high_resolution_clock::now();
-        cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-        cout << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl << endl;
         
         cout << "Middle" << endl;
         begin_time = chrono::high_resolution_clock::now();
         QuickSort2(input_vector, greater<int>{});
         end_time = chrono::high_resolution_clock::now();
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-        cout << endl;
+        cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl << endl;
         
         cout << "First" << endl;
         begin_time = chrono::high_resolution_clock::now();
@@ -248,27 +264,8 @@ void testSortingWrapper(int argc, char **argv) {
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
         cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
     }
-    
-    
-  // Call HeapSort / MergeSort / QuickSort  using appropriate input.
-  // ...
-  // if comparison type is "less" then call 
-  // MergeSort(input_vector, less<int>{})
-  // otherwise call
-  // MergeSort(input_vector, greater<int>{})
-  // ...
-  // ^^SAME for HeapSort & QuickSort
-
-  // Call quicksort with median of three as pivot / middle as pivot / first as pivot using appropriate input.
-  // ...
-  // if comparison type is "less" then call 
-  // QuickSort(input_vector, less<int>{})
-  // otherwise call
-  // QuickSort(input_vector, greater<int>{})
-  // ...
-  // ^^SAME for QuickSort2 & QuickSort3
-
 }
+
 
 int main(int argc, char **argv) {
   // DO NOT CHANGE or ADD ANY CODE in this function.
