@@ -68,14 +68,18 @@ Pick median as the pivot.
 
 Things I struggled on:
 
-1. Especially on quicksort 2 and quicksort3. //lines 210 - 406 
+1. Especially on quicksort 2 and quicksort3, It shows both quicksorts are verified when I test them but
+grade scope says otherwise (says they're inccorect and returns 0, when they return 1 on my terminal ).
+//lines 210 - 406 
 I set the pivot to the first element and middle element using a[left] which = a[0] the first element of the 
-array and center = (left + right) /2 which = a[center].
+array and center = (left + right) /2 which = a[center]. set int i = left - 1 and int j = right + 1 (line 318
+and line 345).
 
 2. struggled with figuring out how to implement comparator into sorting. Couldn't figure out the syntaxs and 
 add the template but managed
 
-3. couldn't figure why my sort were not processing correctly on gradescope, it was because of my function and helper placement.
+3. couldn't figure why my sort were not processing correctly on gradescope, it was because of my function
+and helper placement.
 
 If I had more time:
 
