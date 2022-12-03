@@ -200,9 +200,39 @@ void mergeSort( vector<Comparable> & a, Comparator less_than)
 }
 
 
+/*
+ * This is the more public version of insertion sort.
+ * It requires a pair of iterators and a comparison
+ * function object.
+ */
+template <typename RandomIterator, typename Comparator>
+void insertionSort( const RandomIterator & begin,
+                    const RandomIterator & end,
+                    Comparator lessThan )
+{
+    if( begin == end )
+        return;
+        
+    RandomIterator j;
 
+    for( RandomIterator p = begin+1; p != end; ++p )
+    {
+        auto tmp = std::move( *p );
+        for( j = p; j != begin && lessThan( tmp, *( j-1 ) ); --j )
+            *j = std::move( *(j-1) );
+        *j = std::move( tmp );
+    }
+}
 
-
+/*
+ * The two-parameter version calls the three parameter version, using C++11 decltype
+ */
+template <typename RandomIterator>
+void insertionSort( const RandomIterator & begin,
+                    const RandomIterator & end )
+{
+    insertionSort( begin, end, less<decltype(*begin )>{ } );
+}
 /**
  * Return median of left, center, and right.
  * Order these and hide the pivot.
@@ -285,7 +315,7 @@ void quicksort2( vector<Comparable> & a, int left, int right, Comparator less_th
         Comparable & pivot =  middle(a,left,right,less_than);;
 
             // Begin partitioning
-        int i = left - 1, j = right +1;
+        int i = left-1, j = right+1;
         for( ; ; )
         {
             while( less_than(a[ ++i ], pivot )) { }
@@ -313,7 +343,7 @@ void quicksort3( vector<Comparable> & a, int left, int right, Comparator less_th
         Comparable & pivot = first(a,left,right,less_than);
 
             // Begin partitioning
-        int i = left -1 , j = right + 1 ;
+        int i = left-1, j = right+1;
         for( ; ; )
         {
             while( less_than(a[ ++i ], pivot )) { }
@@ -324,7 +354,7 @@ void quicksort3( vector<Comparable> & a, int left, int right, Comparator less_th
                 break;
         }
 
-        std::swap( a[ i ], a[ right + 1 ] );  // Restore pivot
+        std::swap( a[ i ], a[ right - 1 ] );  // Restore pivot
 
         quicksort( a, left, i - 1, less_than );     // Sort small elements
         quicksort( a, i + 1 , right, less_than );    // Sort large elements
@@ -443,39 +473,7 @@ void SORT( vector<Comparable> & items )
     }
 }
 
-/*
- * This is the more public version of insertion sort.
- * It requires a pair of iterators and a comparison
- * function object.
- */
-template <typename RandomIterator, typename Comparator>
-void insertionSort( const RandomIterator & begin,
-                    const RandomIterator & end,
-                    Comparator lessThan )
-{
-    if( begin == end )
-        return;
-        
-    RandomIterator j;
 
-    for( RandomIterator p = begin+1; p != end; ++p )
-    {
-        auto tmp = std::move( *p );
-        for( j = p; j != begin && lessThan( tmp, *( j-1 ) ); --j )
-            *j = std::move( *(j-1) );
-        *j = std::move( tmp );
-    }
-}
-
-/*
- * The two-parameter version calls the three parameter version, using C++11 decltype
- */
-template <typename RandomIterator>
-void insertionSort( const RandomIterator & begin,
-                    const RandomIterator & end )
-{
-    insertionSort( begin, end, less<decltype(*begin )>{ } );
-}
 
 //   Provide code for the following functions.
 //   See PDF for full details.
