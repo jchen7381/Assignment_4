@@ -239,6 +239,8 @@ void testSortingWrapper(int argc, char **argv) {
         end_time = chrono::high_resolution_clock::now();
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
         cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
+        
+    
     }
     else if(comparison_type == "greater"){
         
@@ -263,6 +265,7 @@ void testSortingWrapper(int argc, char **argv) {
         end_time = chrono::high_resolution_clock::now();
         cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
         cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+  
     }
 }
 

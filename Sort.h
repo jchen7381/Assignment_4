@@ -200,39 +200,6 @@ void mergeSort( vector<Comparable> & a, Comparator less_than)
 }
 
 
-/*
- * This is the more public version of insertion sort.
- * It requires a pair of iterators and a comparison
- * function object.
- */
-template <typename RandomIterator, typename Comparator>
-void insertionSort( const RandomIterator & begin,
-                    const RandomIterator & end,
-                    Comparator lessThan )
-{
-    if( begin == end )
-        return;
-        
-    RandomIterator j;
-
-    for( RandomIterator p = begin+1; p != end; ++p )
-    {
-        auto tmp = std::move( *p );
-        for( j = p; j != begin && lessThan( tmp, *( j-1 ) ); --j )
-            *j = std::move( *(j-1) );
-        *j = std::move( tmp );
-    }
-}
-
-/*
- * The two-parameter version calls the three parameter version, using C++11 decltype
- */
-template <typename RandomIterator>
-void insertionSort( const RandomIterator & begin,
-                    const RandomIterator & end )
-{
-    insertionSort( begin, end, less<decltype(*begin )>{ } );
-}
 /**
  * Return median of left, center, and right.
  * Order these and hide the pivot.
@@ -473,6 +440,39 @@ void SORT( vector<Comparable> & items )
     }
 }
 
+/*
+ * This is the more public version of insertion sort.
+ * It requires a pair of iterators and a comparison
+ * function object.
+ */
+template <typename RandomIterator, typename Comparator>
+void insertionSort( const RandomIterator & begin,
+                    const RandomIterator & end,
+                    Comparator lessThan )
+{
+    if( begin == end )
+        return;
+        
+    RandomIterator j;
+
+    for( RandomIterator p = begin+1; p != end; ++p )
+    {
+        auto tmp = std::move( *p );
+        for( j = p; j != begin && lessThan( tmp, *( j-1 ) ); --j )
+            *j = std::move( *(j-1) );
+        *j = std::move( tmp );
+    }
+}
+
+/*
+ * The two-parameter version calls the three parameter version, using C++11 decltype
+ */
+template <typename RandomIterator>
+void insertionSort( const RandomIterator & begin,
+                    const RandomIterator & end )
+{
+    insertionSort( begin, end, less<decltype(*begin )>{ } );
+}
 
 
 //   Provide code for the following functions.
