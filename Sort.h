@@ -237,8 +237,8 @@ template <typename Comparable, typename Comparator >
 Comparable & first( vector<Comparable> & a, int left, int right, Comparator less_than )
 {
         // Place pivot at position right - 1
-    std::swap( a[ left ], a[ right - 1 ] );
-    return a[ right - 1 ];
+    std::swap( a[left + 1], a[ right - 1] );
+    return a[ right - 1];
 }
 
 

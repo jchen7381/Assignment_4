@@ -140,12 +140,12 @@ void testSortingWrapper(int argc, char **argv) {
     
     cout << "MergeSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
-    MergeSort(input_vector, greater<int>{});
+    MergeSort(input_vector, less<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     cout << endl;
-  
+    
     
     cout << "QuickSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
@@ -157,10 +157,10 @@ void testSortingWrapper(int argc, char **argv) {
     
     cout << "ShellSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
-    ShellSort(input_vector, greater<int>{});
+    ShellSort(input_vector, less<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     cout << endl;
     
     cout << "Testing QuickSort Pivot Implementions" << endl;
@@ -188,7 +188,7 @@ void testSortingWrapper(int argc, char **argv) {
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
     cout << endl;
-    
+   
     
     
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.
