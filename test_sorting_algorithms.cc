@@ -1,6 +1,6 @@
 // Homework 4
 // Testing Sorting Algorithms
-// YOUR NAME
+// Jason Chen
 
 #include "Sort.h"
 #include <chrono>
@@ -36,14 +36,15 @@ void TestTiming() {
 // Generates and returns random vector of size @size_of_vector.
 vector<int> GenerateRandomVector(size_t size_of_vector) {
   // Use rand() to generate random integer
-  // Add code
+    //create a vector
+    //loop through a vector
+    //pushback rand() numbers into the vector
+    //return vector
     vector<int> random_vector;
     for(unsigned int i = 0; i < size_of_vector; ++i){
         random_vector.push_back(rand());
     }
-    for(unsigned int i = 0; i < size_of_vector; ++i){
 
-    }
     return random_vector;
 }
 
@@ -52,6 +53,9 @@ vector<int> GenerateRandomVector(size_t size_of_vector) {
 // Otherwise returns vector sorted from large to small
 vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) {
   // Add code
+    //create a vector
+    //if its sorted smaller to larger
+    //loop through vector using size of vector and push back i
     vector<int> sorted_vector;
     if(smaller_to_larger == true){
         for(unsigned int i = 0; i < size_of_vector; ++i){
@@ -73,7 +77,12 @@ vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) 
 // if less_than() is true for all pairs.
 template <typename Comparable, typename Comparator>
 bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
-    
+    //if input is empty = true
+    //if input size is 1 = true
+    //loop through input and check if its in order using comparator
+    //if its in consecutive order - nothing
+    //else return false
+    //return true.
     if(input.empty()){
         return true;
     }
@@ -175,18 +184,18 @@ void testSortingWrapper(int argc, char **argv) {
     
     cout << "Middle" << endl;
     begin_time = chrono::high_resolution_clock::now();
-    QuickSort2(input_vector, greater<int>{});
+    QuickSort2(input_vector, less<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     cout << endl;
     
     cout << "First" << endl;
     begin_time = chrono::high_resolution_clock::now();
-    QuickSort3(input_vector, greater<int>{});
+    QuickSort3(input_vector, less<int>{});
     end_time = chrono::high_resolution_clock::now();
     cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
     cout << endl;
     for(unsigned int i = 0; i < input_vector.size(); i++){
         cout << input_vector[i] << " ";
