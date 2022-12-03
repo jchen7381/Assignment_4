@@ -285,7 +285,7 @@ void quicksort2( vector<Comparable> & a, int left, int right, Comparator less_th
         Comparable & pivot =  middle(a,left,right,less_than);;
 
             // Begin partitioning
-        int i = left, j = right - 1;
+        int i = left - 1, j = right +1;
         for( ; ; )
         {
             while( less_than(a[ ++i ], pivot )) { }
@@ -313,7 +313,7 @@ void quicksort3( vector<Comparable> & a, int left, int right, Comparator less_th
         Comparable & pivot = first(a,left,right,less_than);
 
             // Begin partitioning
-        int i = left , j = right - 1 ;
+        int i = left -1 , j = right + 1 ;
         for( ; ; )
         {
             while( less_than(a[ ++i ], pivot )) { }
@@ -327,7 +327,7 @@ void quicksort3( vector<Comparable> & a, int left, int right, Comparator less_th
         std::swap( a[ i ], a[ right + 1 ] );  // Restore pivot
 
         quicksort( a, left, i - 1, less_than );     // Sort small elements
-        quicksort( a, i , right, less_than );    // Sort large elements
+        quicksort( a, i + 1 , right, less_than );    // Sort large elements
     }
     else  // Do an insertion sort on the subarray
         insertionSort( a, left, right, less_than );
