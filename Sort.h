@@ -237,7 +237,7 @@ template <typename Comparable, typename Comparator >
 Comparable & first( vector<Comparable> & a, int left , int right, Comparator less_than )
 {
         // Place pivot at position right - 1
-    std::swap( a[left ], a[ right - 1] );
+    std::swap( a[left - 1], a[ right - 1] );
     return a[ right - 1];
 }
 
@@ -282,7 +282,8 @@ void quicksort2( vector<Comparable> & a, int left, int right, Comparator less_th
 {
     if( left + 10 <= right )
     {
-        Comparable & pivot = middle( a, left, right, less_than );
+        int center = (left + right )/2;
+        Comparable & pivot = a[center] ;
 
             // Begin partitioning
         int i = left, j = right - 1;
@@ -310,10 +311,10 @@ void quicksort3( vector<Comparable> & a, int left, int right, Comparator less_th
 {
     if( left + 10 <= right )
     {
-        Comparable & pivot = first( a, left ,right  , less_than );
+        Comparable & pivot = left;
 
             // Begin partitioning
-        int i = left-1, j = right + 3;
+        int i = left, j = right;
         for( ; ; )
         {
             while( less_than(a[ ++i ], pivot )) { }
