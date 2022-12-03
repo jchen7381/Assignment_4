@@ -313,7 +313,7 @@ void quicksort3( vector<Comparable> & a, int left, int right, Comparator less_th
         Comparable & pivot = first(a,left,right,less_than);
 
             // Begin partitioning
-        int i = left - 1 , j = right + 1 ;
+        int i = left , j = right - 1 ;
         for( ; ; )
         {
             while( less_than(a[ ++i ], pivot )) { }
