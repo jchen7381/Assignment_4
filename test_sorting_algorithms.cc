@@ -129,17 +129,12 @@ void testSortingWrapper(int argc, char **argv) {
       input_vector = GenerateSortedVector(input_size, false);
       
   }
-    input_vector = {13,21,31,2,45,1,2,26};
     cout << "HeapSort" << endl;
     auto begin_time = chrono::high_resolution_clock::now();
     HeapSort(input_vector, greater<int>{});
     auto end_time = chrono::high_resolution_clock::now();
-    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
-        cout << input_vector[i] << " " ;
-    }
-    cout << endl;
     cout << endl;
 
     
@@ -147,36 +142,52 @@ void testSortingWrapper(int argc, char **argv) {
     begin_time = chrono::high_resolution_clock::now();
     MergeSort(input_vector, greater<int>{});
     end_time = chrono::high_resolution_clock::now();
-    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
-        cout << input_vector[i] << " " ;
-    }
     cout << endl;
-    cout << endl;
+  
     
     cout << "QuickSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
     QuickSort(input_vector, greater<int>{});
     end_time = chrono::high_resolution_clock::now();
-    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
     cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
-    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
-        cout << input_vector[i] << " " ;
-    }
-    cout << endl;
     cout << endl;
     
     cout << "ShellSort" << endl;
     begin_time = chrono::high_resolution_clock::now();
-    ShellSort(input_vector, less<int>{});
+    ShellSort(input_vector, greater<int>{});
     end_time = chrono::high_resolution_clock::now();
-    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << "ns" << endl;
-    cout << "Verified: " << VerifyOrder(input_vector, less<int>{}) << endl;
-    for(unsigned int i = 0 ; i <= input_vector.size(); ++i){
-        cout << input_vector[i] << " " ;
-    }
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << endl;
     
+    cout << "Testing QuickSort Pivot Implementions" << endl;
+    cout << endl;
+    cout << "Median of Three" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    QuickSort(input_vector, greater<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << endl;
+    
+    cout << "Middle" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    QuickSort2(input_vector, greater<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << endl;
+    
+    cout << "First" << endl;
+    begin_time = chrono::high_resolution_clock::now();
+    QuickSort3(input_vector, greater<int>{});
+    end_time = chrono::high_resolution_clock::now();
+    cout << "Runtime: " << ComputeDuration(begin_time, end_time) << " ns" << endl;
+    cout << "Verified: " << VerifyOrder(input_vector, greater<int>{}) << endl;
+    cout << endl;
     
     
     
